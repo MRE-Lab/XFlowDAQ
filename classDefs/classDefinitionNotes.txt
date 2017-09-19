@@ -1,0 +1,66 @@
+Turbine Class
+- properties
+ > geometry
+ > turbine #
+ > blade position offset
+- methods
+ > calculate turbine performance, loads, time resolution, & stat
+
+
+
+Instrument Class
+
+- properties
+ > data storage method
+	-simulink ___ cols in output matrix 
+	-saved to file - Name/prefix
+ > aquisition rate
+ > turbine #
+ > name
+
+
+Instrument Subclasses:
+
+Encoder
+- properties
+ > cpr
+ > polarity
+ > zero offset
+- methods
+ > tare
+ > convert data to 
+
+Force/Torque measurement class
+- properties
+ > calibration value matrix
+ > tare value
+ > channel polarity
+- methods
+ > convert to Nm
+ > subclass: six axis load cell
+	-rotation matrix of angle
+
+ADV
+- properties
+ > transform matrix (beam to xyz)
+ > rotation (adv to flume reference frame)
+ > position
+ > acquistion rate
+- methods
+ > tare
+ > convert data to radians
+ > calculate angular velocity/acceleration
+
+Motor
+- properties 
+ > command motor (velocity, torque)
+ > conversion (command voltage converted to applied velocity or torque)
+- methods
+ > convert to correct units (rad/s, Nm)
+
+Temperature Probe
+- properties
+ > voltage outputed conversion values
+- methods
+ > conversion (voltage to deg C)
+
