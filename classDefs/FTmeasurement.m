@@ -8,9 +8,23 @@ classdef FTmeasurement < InstrumentClass
     end
     
     methods
-        % Convert raw voltage data to force/torque 
-        function out = convertVoltage(obj,rawdata)
-            
+        % Convert raw voltage data to force/torque
+        function forces = convertVoltage(obj,rawData)
+            if size(obj.tare,2) ~= size(rawData,2)
+                error('rawData and tare values must have the same number of columns')
+            end
+            forces = bsxfun(@minus,rawData,obj.tare);
+            if numel(obj.calibration) == 1 % for single strain-gauge measurement
+                forces = forces.*obj.calibration;
+            else % for 6-axis load cells
+                forces = forces*obj.calibration;
+            end
+            if ~isempty(rotMat)
+                forces(:,1:2) = forces(:,1:2)*obj.rotationMatrix;
+                forces(:,4:5) = forces(:,4:5)*obj.rotationMatrix;
+            end
         end
+        
     end
+    
 end
